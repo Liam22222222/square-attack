@@ -39,7 +39,6 @@ plyx = 0.0
 plyy = 0.0
 plyxs = 0.0
 plyys = 0.0
-dir = 0.0
 while i < numbox:
     size = random.randint(100,150)
     boxs.append(size)
