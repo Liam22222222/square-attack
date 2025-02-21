@@ -21,12 +21,17 @@ font = pygame.font.SysFont('Comic Sans MS', 60)
 ply = pygame.Rect(60,60,60,60)
 boxs = []
 boxpos = []
+# make these numbers a fraction of width and height, make width and height constants
+# https://stackoverflow.com/questions/2682745/how-do-i-create-a-constant-in-python
 endx = random.randint(700,1200)
 endy = random.randint(50, 800)
 numbox = level
 joydist = 0.0
 i = 0
 a = 0
+
+# make a class for a position that holds x, y, size
+# https://www.w3schools.com/python/python_classes.asp
 size = 100
 objs = 0.0
 objpos = 0.0
@@ -71,6 +76,7 @@ while True:
     plyx += plyxs
     plyy += plyys
     
+    # refer to width
     if plyx > 1700:
         plyx = 1700
         plyxs = 0.0
