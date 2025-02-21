@@ -1,5 +1,6 @@
 from pygame.locals import *
 import pygame, sys
+import sys
 import random
 import math
 
@@ -13,13 +14,16 @@ pygame.display.set_caption("Liams game")
 point = False
 score = 0
 text = ""
+time = 5
+level = 1
+lives = 15
 font = pygame.font.SysFont('Comic Sans MS', 60)
 ply = pygame.Rect(60,60,60,60)
 boxs = []
 boxpos = []
 endx = random.randint(700,1200)
 endy = random.randint(50, 800)
-numbox = random.randint(5, 10)
+numbox = level
 joydist = 0.0
 i = 0
 a = 0
@@ -87,7 +91,8 @@ while True:
         boxpos = []
         endx = random.randint(700,1200)
         endy = random.randint(50, 800)
-        numbox = random.randint(5, 10)
+        level += 1
+        numbox = level
         joydist = 0.0
         i = 0
         a = 0
@@ -98,7 +103,8 @@ while True:
         plyy = 0.0
         plyxs = 0.0
         plyys = 0.0
-        score += 1
+        score += math.ceil(time)
+        time = 5
         while i < numbox:
             size = random.randint(100,150)
             boxs.append(size)
@@ -135,8 +141,6 @@ while True:
             boxpos[i + 1] = -100
         i += 2
 
-    text = font.render(str(score), False, (0,0,0))
-
     screen.fill((127,127,127))
     pygame.draw.circle(screen,(0,255,0),(endx,endy),60)
     ply.move_ip(plyxs,plyys)
@@ -157,6 +161,12 @@ while True:
             score += -1
         i += 4
         a += 2
+    time += -0.005
+    text = font.render(str(level), False, (0,0,0))
+    screen.blit(text,(190,0))
+    text = font.render(str(math.ceil(time)), False, (0,0,0))
+    screen.blit(text,(100,0))
+    text = font.render(str(score), False, (0,0,0))
     screen.blit(text,(10,0))
     pygame.display.update()
         
