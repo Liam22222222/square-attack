@@ -111,7 +111,7 @@ while True:
         score += math.ceil(time)
         time = 5
         add_cubes()
-        
+
     i = 0
     a = 0
     
@@ -153,11 +153,12 @@ while True:
         i += 4
         a += 2
     time += -0.005
-    text = font.render(str(level), False, (0,0,0))
-    screen.blit(text,(190,0))
-    text = font.render(str(math.ceil(time)), False, (0,0,0))
-    screen.blit(text,(100,0))
-    text = font.render(str(score), False, (0,0,0))
+    pygame.draw.rect(screen,(250,250,250),pygame.Rect(0,100,width,hight - 800))
+    text = font.render("level:"+str(level), False, (0,0,0))
+    screen.blit(text,(600,0))
+    text = font.render("time:"+str(math.ceil(time)), False, (0,0,0))
+    screen.blit(text,(300,0))
+    text = font.render("score:"+str(score), False, (0,0,0))
     screen.blit(text,(10,0))
     pygame.display.update()
         
