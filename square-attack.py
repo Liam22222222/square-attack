@@ -40,16 +40,20 @@ class plyer:
 
 ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
 
-while i < numbox:
-    size = random.randint(100,150)
-    boxs.append(size)
-    boxs.append(size)
-    boxs.append(size)
-    boxs.append(size)
-    boxpos.append(random.randint(-10,1000))
-    boxpos.append(random.randint(-10,500))
-    i += 1
-    
+def add_cubes():
+    i = 0
+    while i < numbox:
+        size = random.randint(100,150)
+        boxs.append(size)
+        boxs.append(size)
+        boxs.append(size)
+        boxs.append(size)
+        boxpos.append(random.randint(-10,1000))
+        boxpos.append(random.randint(-10,500))
+        i += 1
+
+add_cubes()
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -106,16 +110,8 @@ while True:
         ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
         score += math.ceil(time)
         time = 5
-        while i < numbox:
-            size = random.randint(100,150)
-            boxs.append(size)
-            boxs.append(size)
-            boxs.append(size)
-            boxs.append(size)
-            boxpos.append(random.randint(-10,1000))
-            boxpos.append(random.randint(-10,500))
-            i += 1
-
+        add_cubes()
+        
     i = 0
     a = 0
     
