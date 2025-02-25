@@ -144,13 +144,13 @@ while True:
 
     time += -0.005
 
-    text = font.render("level:"+str(level), False, (250,0,0))
+    text = font.render("level:"+str(level), False, (250,250,250))
     screen.blit(text,(600,0))
 
-    text = font.render("time:"+str(math.ceil(time)), False, (0,250,0))
+    text = font.render("time:"+str(math.ceil(time)), False, (250,250,250))
     screen.blit(text,(300,0))
 
-    text = font.render("score:"+str(score), False, (0,0,250))
+    text = font.render("score:"+str(score), False, (250,250,250))
     screen.blit(text,(10,0))
 
     pygame.display.update()
