@@ -18,14 +18,12 @@ time = 5
 level = 1
 lives = 15
 font = pygame.font.SysFont('Comic Sans MS', 60)
-boxs = []
 boxpos = []
-endx = random.randint(width - 900,width - 400)
-endy = random.randint(hight - 850, hight - 100)
+endx = random.randint(200,width - 400)
+endy = random.randint(60, hight - 100)
 numbox = level
 joydist = 0.0
 i = 0
-a = 0
 size = 100
 objs = 0.0
 objpos = 0.0
@@ -44,12 +42,10 @@ def add_cubes():
     i = 0
     while i < numbox:
         size = random.randint(100,150)
-        boxs.append(size)
-        boxs.append(size)
-        boxs.append(size)
-        boxs.append(size)
-        boxpos.append(random.randint(-10,1000))
-        boxpos.append(random.randint(-10,500))
+        boxpos.append(random.randint(500,1000))
+        boxpos.append(random.randint(0,500))
+        boxpos.append(size)
+        boxpos.append(size)
         i += 1
 
 add_cubes()
@@ -79,31 +75,30 @@ while True:
     ply.ys += ply.ys * -0.1
     ply.x += ply.xs
     ply.y += ply.ys
+    ply.s = pygame.Rect(ply.x,ply.y,60,60)
     
-    if ply.x > width + 100:
-        ply.x = width + 100
+    if ply.x > width - 300:
+        ply.x = width - 300
         ply.xs = 0.0
-    if ply.x < -100:
-        ply.x = -100
+    if ply.x < 0:
+        ply.x = 0
         ply.xs = 0.0
-    if ply.y > hight - 50:
-        ply.y = hight - 50
+    if ply.y > hight - 200:
+        ply.y = hight - 200
         ply.ys = 0.0
-    if ply.y < -100:
-        ply.y = -100
+    if ply.y < 0:
+        ply.y = 0
         ply.ys = 0.0
     
     point = ply.s.collidepoint(endx,endy)
     if point:
-        boxs = []
         boxpos = []
-        endx = random.randint(width - 900,width - 400)
-        endy = random.randint(hight - 850, hight - 100)
+        endx = random.randint(200,width - 400)
+        endy = random.randint(60, hight - 100)
         level += 1
         numbox = level
         joydist = 0.0
         i = 0
-        a = 0
         size = 100
         objs = 0.0
         objpos = 0.0
@@ -113,52 +108,51 @@ while True:
         add_cubes()
 
     i = 0
-    a = 0
     
     while i < len(boxpos):
 
-        if ply.x - 180 > boxpos[i]:
+        if ply.x > boxpos[i]:
             boxpos[i] += random.randint(0,5)
-        if ply.y - 180 > boxpos[i + 1]:
+        if ply.y > boxpos[i + 1]:
             boxpos[i + 1] += random.randint(0,5)
-        if ply.x - 180 < boxpos[i]:
+        if ply.x < boxpos[i]:
             boxpos[i] += random.randint(-5,0)
-        if ply.y - 180 < boxpos[i + 1]:
+        if ply.y < boxpos[i + 1]:
             boxpos[i + 1] += random.randint(-5,0)
 
-        if boxpos[i] > width + 100:
-            boxpos[i] = width + 100
-        if boxpos[i] < -10:
-            boxpos[i] = -10
-        if boxpos[i + 1] > hight - 50:
-            boxpos[i + 1] = hight - 50
-        if boxpos[i + 1] < -100:
-            boxpos[i + 1] = -100
-        i += 2
+        if boxpos[i] > width - 300:
+            boxpos[i] = width - 300
+        if boxpos[i] < 150:
+            boxpos[i] = 150
+        if boxpos[i + 1] > hight - 200:
+            boxpos[i + 1] = hight - 200
+        if boxpos[i + 1] < 0:
+            boxpos[i + 1] = 0
+        i += 4
 
     screen.fill((127,127,127))
     pygame.draw.circle(screen,(0,255,0),(endx,endy),60)
-    ply.s.move_ip(ply.xs,ply.ys)
     pygame.draw.rect(screen, (255,0,0), ply.s)
     i = 0
-    a = 0
-    while i < len(boxs):
-        objs = pygame.Rect(boxs[i], boxs[i + 1], boxs[i + 2], boxs[i + 3])
-        objs.move_ip(boxpos[a], boxpos[a + 1])
+    while i < len(boxpos):
+        objs = pygame.Rect(boxpos[i], boxpos[i + 1], boxpos[i + 2], boxpos[i + 3])
         pygame.draw.rect(screen, (0,0,0), objs)
         point = objs.collidepoint(ply.x,ply.y)
         if point:
             ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
             score += -1
         i += 4
-        a += 2
+
     time += -0.005
-    pygame.draw.rect(screen,(250,250,250),pygame.Rect(0,100,width,hight - 800))
-    text = font.render("level:"+str(level), False, (0,0,0))
+
+    text = font.render("level:"+str(level), False, (250,0,0))
     screen.blit(text,(600,0))
-    text = font.render("time:"+str(math.ceil(time)), False, (0,0,0))
+
+    text = font.render("time:"+str(math.ceil(time)), False, (0,250,0))
     screen.blit(text,(300,0))
-    text = font.render("score:"+str(score), False, (0,0,0))
+
+    text = font.render("score:"+str(score), False, (0,0,250))
     screen.blit(text,(10,0))
+
     pygame.display.update()
         
