@@ -1,6 +1,5 @@
 from pygame.locals import *
 import pygame, sys
-import sys
 import random
 import math
 
@@ -155,4 +154,3 @@ while True:
     screen.blit(text,(10,0))
 
     pygame.display.update()
-        
