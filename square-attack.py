@@ -2,7 +2,7 @@ from pygame.locals import *
 import pygame, sys
 import random
 import math
-import os
+import time
 
 pygame.init()
 pygame.font.init()
@@ -14,7 +14,7 @@ pygame.display.set_caption("Liams game")
 point = False
 score = 0
 text = ""
-time = -1
+time1 = 0
 level = 1
 lives = 15
 font = pygame.font.SysFont('Comic Sans MS', 60)
@@ -104,7 +104,7 @@ while True:
         objpos = 0.0
         ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
         score += math.ceil(time)
-        time = 5
+        time1 = 5
         add_cubes()
 
     i = 0
@@ -143,23 +143,23 @@ while True:
             score += -1
         i += 4
 
-    time += -0.005
+    time1 += -0.005
 
-    if math.ceil(time) == -1:
+    if math.ceil(time1) <= -1:
         text = font.render("GAME OVER", False, (250,250,250))
         screen.blit(text,((width / 2) - 300,(hight / 2) - 200))
 
         text = font.render("SCORE:"+str(score), False, (250,250,250))
         screen.blit(text,((width / 2) - 300,(hight / 2) - 300))
-
-        os.wait(5)
+        pygame.display.update()
+        time.sleep(2)
         pygame.quit()
         sys.exit()
 
     text = font.render("level:"+str(level), False, (250,250,250))
     screen.blit(text,(600,0))
 
-    text = font.render("time:"+str(math.ceil(time)), False, (250,250,250))
+    text = font.render("time:"+str(math.ceil(time1)), False, (250,250,250))
     screen.blit(text,(300,0))
 
     text = font.render("score:"+str(score), False, (250,250,250))

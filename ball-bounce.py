@@ -2,8 +2,8 @@ import pygame, sys
 
 pygame.init()
 
-SCREEN_WIDTH = 2500
-SCREEN_HEIGHT = 1600
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 800
 BALL_RADIUS = 60
 
 # Colors
