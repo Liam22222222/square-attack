@@ -14,7 +14,7 @@ pygame.display.set_caption("Liams game")
 point = False
 score = 0
 text = ""
-time1 = 0
+time1 = 5
 level = 1
 lives = 15
 font = pygame.font.SysFont('Comic Sans MS', 60)
