@@ -103,7 +103,7 @@ while True:
         objs = 0.0
         objpos = 0.0
         ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
-        score += math.ceil(time)
+        score += math.ceil(time1)
         time1 = 5
         add_cubes()
 
