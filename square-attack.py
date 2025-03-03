@@ -107,6 +107,8 @@ while True:
         time1 = 5
         add_cubes()
 
+
+
     i = 0
     
     while i < len(boxpos):
