@@ -1,5 +1,7 @@
 from pygame.locals import *
-import pygame, sys
+import py
+import pygame
+import sys
 import random
 import math
 import time
@@ -48,6 +50,7 @@ def add_cubes():
         boxpos.append(size)
         boxpos.append(size)
         i += 1
+
 
 add_cubes()
 
