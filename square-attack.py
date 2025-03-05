@@ -29,14 +29,15 @@ objs = 0.0
 objpos = 0.0
 
 class plyer:
-    def __init__(self,s,x,y,xs,ys):
+    def __init__(self,s,x,y,xs,ys,d):
         self.s = s
         self.x = x
         self.y = y
         self.xs = xs
         self.ys = ys
+        self.d = d
 
-ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
+ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0,0.0)
 
 def add_cubes():
     i = 0
@@ -102,7 +103,7 @@ while True:
         size = 100
         objs = 0.0
         objpos = 0.0
-        ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
+        ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0,0.0)
         score += math.ceil(time1)
         time1 = 5
         add_cubes()
@@ -141,7 +142,7 @@ while True:
         pygame.draw.rect(screen, (0,0,0), objs)
         point = objs.collidepoint(ply.x,ply.y)
         if point:
-            ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0)
+            ply = plyer(pygame.Rect(60,60,60,60),0.0,0.0,0.0,0.0,0.0)
             score += -1
         i += 4
 
