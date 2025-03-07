@@ -2,8 +2,8 @@ import pygame, sys, math
 
 pygame.init()
 
-SCREEN_WIDTH = 2500
-SCREEN_HEIGHT = 1600
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 900
 IMAGE_WIDTH = 100
 BALL_RADIUS = 10
 
