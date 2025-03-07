@@ -59,14 +59,17 @@ while True:
             projectile_angle = angle
     key = pygame.key.get_pressed()
     if key[pygame.K_UP]:
-        img_pos[1] += 2
+        img_pos[0] -= img_speed[0]*math.sin(angle-90)
+        img_pos[1] -= img_speed[1]*math.cos(angle-90)
     if key[pygame.K_DOWN]:
-        img_pos[1] -= 2
+        img_pos[0] += img_speed[0]*math.sin(angle-90)
+        img_pos[1] += img_speed[1]*math.cos(angle-90)
     if key[pygame.K_LEFT]:
-        img_pos[0] -= 2
+        angle += img_speed[1]
     if key[pygame.K_RIGHT]:
-        img_pos[0] += 2
-    print(key)
+        angle -= img_speed[1]
+    if 360 < angle:
+        angle = 0.0
     screen.fill(BACKGROUND_COLOR)
     screen.blit(text, (SCREEN_WIDTH // 2 - text.get_width()//2, 100))   # Centering title in the screen
 
@@ -74,7 +77,7 @@ while True:
         x += 4 *math.sin(projectile_angle)
         y += 4 *math.cos(projectile_angle)
         pygame.draw.circle(screen, BALL_COLOR, (x, y), BALL_RADIUS)
-
+    angle += 1
     rotated_img = rot_center(img, angle)
     screen.blit(rotated_img,(img_pos[0],img_pos[1]))
     pygame.display.update()
