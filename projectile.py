@@ -4,7 +4,8 @@ pygame.init()
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
-IMAGE_WIDTH = 100
+IMAGE_HIGHT = 128
+IMAGE_WIDTH = 200
 BALL_RADIUS = 10
 
 # Colors
@@ -23,8 +24,8 @@ text = font.render("Projectile", True, FONT_COLOR)
 # Set up image
 img_pos = [SCREEN_WIDTH//2, SCREEN_HEIGHT//2]
 img_speed = [2,2]
-img = pygame.image.load('images/star.png')
-img = pygame.transform.scale(img, (IMAGE_WIDTH, IMAGE_WIDTH))
+img = pygame.image.load('images/tank1.svg')
+img = pygame.transform.scale(img, (IMAGE_WIDTH, IMAGE_HIGHT))
 
 # Rotation Angle
 angle = 0
