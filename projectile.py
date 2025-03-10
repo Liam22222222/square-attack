@@ -36,6 +36,13 @@ ball_pos = [0,0]
 ball_speed = [2,2]
 ball_dir = [0,0]
 
+def clamp(fall,rise,input):
+    if input < fall:
+        input = fall
+    if input > rise:
+        input = rise
+    return(input)
+
 def rot_center(image, angle):
     """rotate a Surface, maintaining position."""
     
@@ -62,11 +69,11 @@ while True:
         ball_dir.append(angle-90)
     key = pygame.key.get_pressed()
     if key[pygame.K_UP]:
-        img_pos[0] -= img_speed[0]*math.sin(angle-90)
-        img_pos[1] -= img_speed[1]*math.cos(angle-90)
+        img_pos[0] -= img_speed[0]*clamp(-1,1,round(math.sin(angle-90)))
+        img_pos[1] -= img_speed[1]*clamp(-1,1,round(math.cos(angle-90)))
     if key[pygame.K_DOWN]:
-        img_pos[0] += img_speed[0]*math.sin(angle-90)
-        img_pos[1] += img_speed[1]*math.cos(angle-90)
+        img_pos[0] += img_speed[0]*clamp(-1,1,round(math.sin(angle-90)))
+        img_pos[1] += img_speed[1]*clamp(-1,1,round(math.cos(angle-90)))
     if key[pygame.K_LEFT]:
         angle += img_speed[1]
     if key[pygame.K_RIGHT]:
