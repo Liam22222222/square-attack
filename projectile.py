@@ -32,8 +32,9 @@ img = pygame.transform.scale(img, (IMAGE_WIDTH, IMAGE_HIGHT))
 angle = 0
 
 # Set Balls initial position to the center of the screen
-ball_pos = [SCREEN_WIDTH//2, SCREEN_HEIGHT//2]
+ball_pos = [0,0]
 ball_speed = [2,2]
+ball_dir = [0,0]
 
 def rot_center(image, angle):
     """rotate a Surface, maintaining position."""
@@ -53,10 +54,12 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        if event.type == pygame.KEYDOWN:
-            key = pygame.key.name(event.key)
-            projectile = True
-            projectile_angle = angle
+    key = pygame.key.get_pressed()
+    if key[pygame.K_SPACE]:
+        ball_pos.append(img_pos[0])
+        ball_pos.append(img_pos[1])
+        ball_dir.append(angle-90)
+        ball_dir.append(angle-90)
     key = pygame.key.get_pressed()
     if key[pygame.K_UP]:
         img_pos[0] -= img_speed[0]*math.sin(angle-90)
@@ -72,12 +75,13 @@ while True:
         angle = 0.0
     screen.fill(BACKGROUND_COLOR)
     screen.blit(text, (SCREEN_WIDTH // 2 - text.get_width()//2, 100))   # Centering title in the screen
+    i = 0
+    while i < len(ball_pos):
+        ball_pos[i] += 4 *math.sin(ball_dir[i])
+        ball_pos[i+1] += 4 *math.cos(ball_dir[i + 1])
+        pygame.draw.circle(screen, BALL_COLOR, (ball_pos[i], ball_pos[i+1]), BALL_RADIUS)
+        i += 2
 
-    if projectile:
-        x += 4 *math.sin(projectile_angle)
-        y += 4 *math.cos(projectile_angle)
-        pygame.draw.circle(screen, BALL_COLOR, (x, y), BALL_RADIUS)
-    angle += 1
     rotated_img = rot_center(img, angle)
     screen.blit(rotated_img,(img_pos[0],img_pos[1]))
     pygame.display.update()
