@@ -32,9 +32,9 @@ img = pygame.transform.scale(img, (IMAGE_WIDTH, IMAGE_HIGHT))
 angle = 0
 
 # Set Balls initial position to the center of the screen
-ball_pos = [0,0]
+ball_pos = [0.0,0.0]
 ball_speed = [2,2]
-ball_dir = [0,0]
+ball_dir = [0.0,0.0]
 
 def clamp(fall,rise,input):
     if input < fall:
@@ -65,15 +65,15 @@ while True:
     if key[pygame.K_SPACE]:
         ball_pos.append(img_pos[0])
         ball_pos.append(img_pos[1])
-        ball_dir.append(angle-90)
-        ball_dir.append(angle-90)
+        ball_dir.append(angle-90.0)
+        ball_dir.append(angle-90.0)
     key = pygame.key.get_pressed()
     if key[pygame.K_UP]:
-        img_pos[0] -= img_speed[0]*clamp(-1,1,round(math.sin(angle-90)))
-        img_pos[1] -= img_speed[1]*clamp(-1,1,round(math.cos(angle-90)))
+        img_pos[0] -= img_speed[0]*clamp(-1,1,round(math.sin(angle-90.0)))
+        img_pos[1] -= img_speed[1]*clamp(-1,1,round(math.cos(angle-90.0)))
     if key[pygame.K_DOWN]:
-        img_pos[0] += img_speed[0]*clamp(-1,1,round(math.sin(angle-90)))
-        img_pos[1] += img_speed[1]*clamp(-1,1,round(math.cos(angle-90)))
+        img_pos[0] += img_speed[0]*clamp(-1,1,round(math.sin(angle-90.0)))
+        img_pos[1] += img_speed[1]*clamp(-1,1,round(math.cos(angle-90.0)))
     if key[pygame.K_LEFT]:
         angle += img_speed[1]
     if key[pygame.K_RIGHT]:
