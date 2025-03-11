@@ -1,10 +1,12 @@
-import pygame, sys
+import pygame, sys, math
+import Projectile
 
 pygame.init()
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 400
+SCREEN_WIDTH = 1500
+SCREEN_HEIGHT = 700
 IMAGE_WIDTH = 100
+BALL_RADIUS = 10
 
 # Colors
 BACKGROUND_COLOR = (221,234,243)
@@ -17,7 +19,7 @@ pygame.display.set_caption("Drawing an image and Rotating")
 
 # Fonts
 font = pygame.font.SysFont("Arial", 32)
-text = font.render("Rotation", True, FONT_COLOR)
+text = font.render("Projectile", True, FONT_COLOR)
 
 # Set up image
 img_pos = [SCREEN_WIDTH//2, SCREEN_HEIGHT//2]
@@ -28,6 +30,21 @@ img = pygame.transform.scale(img, (IMAGE_WIDTH, IMAGE_WIDTH))
 # Rotation Angle
 angle = 0
 
+# Projectile Speed
+projectile_speed = 4
+
+# Set Balls initial position to the center of the screen
+ball_pos = [SCREEN_WIDTH//2, SCREEN_HEIGHT//2]
+ball_speed = [2,2]
+
+# Clock Speed
+clock = pygame.time.Clock()
+fps = 120
+
+# Projectile List
+projectiles = []
+
+
 def rot_center(image, angle):
     """rotate an image while keeping its center and size"""
     orig_rect = image.get_rect()
@@ -37,17 +54,32 @@ def rot_center(image, angle):
     rot_image = rot_image.subsurface(rot_rect).copy()
     return rot_image
 
+projectile = False
+x = SCREEN_WIDTH//2
+y = SCREEN_HEIGHT//2
+
 # Game Loop
 while True:
+    clock.tick(fps)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            key = pygame.key.name(event.key)
+            projectile = True
+            projectile_angle = angle
     
 
 
     screen.fill(BACKGROUND_COLOR)
     screen.blit(text, (SCREEN_WIDTH // 2 - text.get_width()//2, 100))   # Centering title in the screen
+
+    if projectile:
+        x += projectile_speed *math.sin(projectile_angle)
+        y += projectile_speed *math.cos(projectile_angle)
+        pygame.draw.circle(screen, BALL_COLOR, (x, y), BALL_RADIUS)
 
     angle += 1
     rotated_img = rot_center(img, angle)
