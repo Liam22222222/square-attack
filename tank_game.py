@@ -1,6 +1,7 @@
 import pygame
 import sys
-from tank import Tank, Projectile, Enemy
+from tank import Tank, Projectile
+from enemy import Enemy
 
 
 # Constants
