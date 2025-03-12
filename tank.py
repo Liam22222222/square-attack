@@ -82,29 +82,29 @@ class Projectile:
     
 class Enemy:
     def __init__(self, x, y, angle):
-        """Initializes the projectile."""
+        """Initializes the enemys."""
         self.position = pygame.Vector2(x, y)
         self.angle = math.radians(angle)
         self.speed = ENEMY_SPEED
 
     def update(self):
-        """Moves the projectile in the direction it was fired."""
+        """Moves the enemy."""
         self.position.x += self.speed * math.cos(self.angle)
         self.position.y += self.speed * math.sin(self.angle)
 
     def draw(self, surface):
-        """Draws the projectile as a small circle."""
+        """Draws the enemy as a small circle."""
         pygame.draw.circle(surface, (0, 0, 0), (int(self.position.x), int(self.position.y)), ENEMY_SIZE)
 
     def is_off_screen(self):
-        """Check if the projectile is off the screen."""
+        """Check if the enemy is off the screen."""
         return not (0 <= self.position.x <= SCREEN_WIDTH and 0 <= self.position.y <= SCREEN_HEIGHT)
     
     def is_shot(self,x,y):
         """checks if enemy has been hit"""
         return (math.dist((self.position.x,self.position.y),(x,y))) 
     
-    def spawn(self,x,y,a):
+    def spawn(x,y,a):
         """spawns an amount of enemys"""
         i = 0
         e = []
@@ -112,4 +112,4 @@ class Enemy:
             e.append(x)
             e.append(y)
             i += 1
-        return e
+        return (e)

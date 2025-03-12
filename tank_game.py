@@ -19,7 +19,7 @@ tank = Tank(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 3, 'images/tank1.svg')  # Pro
 projectiles = []
 
 # Enemy setup
-enemys = Enemy.spawn(0,SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 10)
+enemys = Enemy.spawn(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 10)
 print(str(enemys))
 dam = 2
 
