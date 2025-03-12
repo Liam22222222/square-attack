@@ -38,12 +38,4 @@ class Enemy:
         """checks if enemy has been hit"""
         return (math.dist((self.position.x,self.position.y),(x,y))) 
     
-    def spawn(x,y,a):
-        """spawns an amount of enemys"""
-        i = 0
-        e = []
-        while i < a:
-            e.append(x)
-            e.append(y)
-            i += 1
-        return (e)
+    

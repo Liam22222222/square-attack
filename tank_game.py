@@ -20,8 +20,7 @@ tank = Tank(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 3, 'images/tank1.svg')  # Pro
 projectiles = []
 
 # Enemy setup
-enemys = Enemy.spawn(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 10)
-print(str(enemys))
+enemys = []
 dam = 2
 
 # Game loop
@@ -46,6 +45,9 @@ while True:
         tank.move(forward=False)  # Move backward
     if keys[pygame.K_SPACE]:
         projectiles.append(tank.fire_projectile())  # Fire projectile
+        enemys.append(SCREEN_WIDTH // 2)
+        enemys.append(SCREEN_HEIGHT // 2)
+        enemys.append(10)
 
     # Update projectiles
     for projectile in projectiles[:]:
