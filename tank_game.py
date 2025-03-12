@@ -1,6 +1,7 @@
 import pygame
 import sys
-from tank import Tank, Projectile
+from tank import Tank, Projectile, Enemy
+
 
 # Constants
 SCREEN_WIDTH = 1600
@@ -16,6 +17,11 @@ pygame.display.set_caption("Tank Game")
 # Tank setup
 tank = Tank(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 3, 'images/tank1.svg')  # Provide path to tank image
 projectiles = []
+
+# Enemy setup
+enemys = Enemy.spawn(0,SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 10)
+print(str(enemys))
+dam = 2
 
 # Game loop
 clock = pygame.time.Clock()
@@ -46,6 +52,13 @@ while True:
         if projectile.is_off_screen():
             projectiles.remove(projectile)  # Remove projectiles that go off-screen
         projectile.draw(screen)
+
+    # Update enemys
+    for enemy in enemys[:]:
+        enemy.update()
+        if enemy.is_off_screen():
+            enemys.remove(enemy)  # Remove enemys that go off-screen
+        enemy.draw(screen)
 
     # Draw the tank
     tank.draw(screen)
