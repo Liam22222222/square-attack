@@ -39,6 +39,7 @@ class Enemy:
     
     def is_shot(self,x,y):
         """checks if enemy has been hit"""
-        return (math.dist((self.position.x,self.position.y),(x,y))) 
+        point = pygame.Rect(self.position).collidepoint(x,y)
+        return (point) 
     
     
