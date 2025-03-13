@@ -45,9 +45,8 @@ while True:
         tank.move(forward=False)  # Move backward
     if keys[pygame.K_SPACE]:
         projectiles.append(tank.fire_projectile())  # Fire projectile
-        enemys.append(SCREEN_WIDTH // 2)
-        enemys.append(SCREEN_HEIGHT // 2)
-        enemys.append(10)
+
+    enemys.append(Enemy())  #This is constantly making enemies... you may want to make a count to only make some at some points
 
     # Update projectiles
     for projectile in projectiles[:]:

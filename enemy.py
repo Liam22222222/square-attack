@@ -1,6 +1,7 @@
 from pygame.locals import *
 import pygame
 import math
+from random import randrange
 
 #constants
 SCREEN_WIDTH = 1600
@@ -13,12 +14,14 @@ i = 0
 e = []
 dist = 0
 
-
+# Now we are randomly placing the enemies
 class Enemy:
-    def __init__(self, x, y, angle):
+    def __init__(self):
         """Initializes the enemys."""
+        x = randrange(SCREEN_WIDTH)
+        y = randrange(SCREEN_HEIGHT)
         self.position = pygame.Vector2(x, y)
-        self.angle = math.radians(angle)
+        self.angle = math.radians(randrange(0, 360))
         self.speed = ENEMY_SPEED
 
     def update(self):
