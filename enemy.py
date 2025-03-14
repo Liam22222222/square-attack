@@ -1,6 +1,7 @@
 from pygame.locals import *
 import pygame
 import math
+from tank import Tank
 from random import randrange
 
 #constants
@@ -24,11 +25,20 @@ class Enemy:
         self.angle = math.radians(randrange(0, 360))
         self.speed = ENEMY_SPEED
 
-    def update(self):
+    def update(self,tankx,tanky):
         """Moves the enemy."""
+
+        ox = tankx - self.position.x
+        oy = tanky - self.position.y
+        on = 0
+        if tanky > self.position.y:
+            on = 180
+        self.angle = (math.atan(oy/ox)) + on
+        self.angle = math.radians(self.angle)
+
         self.position.x += self.speed * math.cos(self.angle)
         self.position.y += self.speed * math.sin(self.angle)
-
+        
     def draw(self, surface):
         """Draws the enemy as a small circle."""
         pygame.draw.circle(surface, (0, 0, 0), (int(self.position.x), int(self.position.y)), ENEMY_SIZE)

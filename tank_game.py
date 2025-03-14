@@ -14,6 +14,8 @@ FPS = 60
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Tank Game")
+i = 0
+en3 = 6
 
 # Tank setup
 tank = Tank(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 3, 'images/tank1.svg')  # Provide path to tank image
@@ -22,6 +24,9 @@ projectiles = []
 # Enemy setup
 enemys = []
 dam = 2
+while i < en3:
+    enemys.append(Enemy())  #makes some at some points
+    i += 1
 
 # Game loop
 clock = pygame.time.Clock()
@@ -46,7 +51,6 @@ while True:
     if keys[pygame.K_SPACE]:
         projectiles.append(tank.fire_projectile())  # Fire projectile
 
-    enemys.append(Enemy())  #This is constantly making enemies... you may want to make a count to only make some at some points
 
     # Update projectiles
     for projectile in projectiles[:]:
@@ -57,7 +61,7 @@ while True:
 
     # Update enemys
     for enemy in enemys[:]:
-        enemy.update()
+        enemy.update(tank.position.x,tank.position.y)
         if enemy.is_off_screen():
             enemys.remove(enemy)  # Remove enemys that go off-screen
         enemy.draw(screen)

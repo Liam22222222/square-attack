@@ -38,6 +38,7 @@ class Tank:
         direction = 1 if forward else -1
         self.position.x += direction * self.speed * math.cos(angle_radians)
         self.position.y += direction * self.speed * math.sin(angle_radians)
+        
 
     def draw(self, surface):
         """Rotates and draws the tank on the screen."""
