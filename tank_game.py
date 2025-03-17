@@ -20,10 +20,11 @@ en3 = 6
 # Tank setup
 tank = Tank(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 3, 'images/tank1.svg')  # Provide path to tank image
 projectiles = []
+health = 100
 
 # Enemy setup
 enemys = []
-dam = 2
+dam = 0.00002
 while i < en3:
     enemys.append(Enemy())  #makes some at some points
     i += 1
@@ -62,6 +63,9 @@ while True:
     # Update enemys
     for enemy in enemys[:]:
         enemy.update(tank.position.x,tank.position.y)
+        if enemy.get_tank(tank.position.x,tank.position.y):
+            health -= dam
+            print(health)
         if enemy.is_off_screen():
             enemys.remove(enemy)  # Remove enemys that go off-screen
         enemy.draw(screen)
