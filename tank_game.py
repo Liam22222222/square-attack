@@ -62,8 +62,8 @@ while True:
 
     # Update enemys
     for enemy in enemys[:]:
-        enemy.update(tank.position.x,tank.position.y)
-        if enemy.get_tank(tank.position.x,tank.position.y):
+        enemy.update(tank.position.x,tank.position.y,tank.angle)
+        if enemy.get_tank(tank.position.x,tank.position.y,tank.angle):
             health -= dam
             print(health)
         if enemy.is_off_screen():

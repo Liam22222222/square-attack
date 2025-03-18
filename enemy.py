@@ -9,8 +9,8 @@ SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
 ENEMY_SPEED = 5
 ENEMY_SIZE = 8
-TANK_WIDTH = 150
-TANK_HEIGHT = 114
+TANK_WIDTH = 200
+TANK_HEIGHT = 128
 
 #var
 i = 0
@@ -27,29 +27,61 @@ class Enemy:
         self.angle = math.radians(randrange(0, 360))
         self.speed = ENEMY_SPEED
 
-    def update(self,tankx,tanky):
+    def update(self,tankx,tanky,tankd):
         """Moves the enemy."""
 
-        ox = tankx - self.position.x
-        oy = tanky - self.position.y
+        ox = tankx - self.position.x + 0.000001
+        oy = tanky - self.position.y + 0.000001
         on = 0
         if tankx < self.position.x:
             on = 180
         self.angle = (math.atan(oy/ox)) + on
 
+        tankw = (TANK_WIDTH * math.cos(math.radians(tankd))) / 2
+        tankh = (TANK_HEIGHT * math.sin(math.radians(tankd))) / 2
+
         self.position.x += self.speed * math.cos(self.angle)
         self.position.y += self.speed * math.sin(self.angle)
-        point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x + TANK_WIDTH,self.position.y + TANK_HEIGHT)
-        point = point.collidepoint(tankx,tanky)
-        if point:
+
+        point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+        point = point.collidepoint(tankx + tankw,tanky + tankh)
+        if not point:
+            point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+            point = point.collidepoint(tankx - tankw,tanky - tankh)
+            if not point:
+                point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+                point = point.collidepoint(tankx - tankw,tanky + tankh)
+                if not point:
+                    point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+                    point = point.collidepoint(tankx + tankw,tanky - tankh)
+                else:
+                    self.position.x -= self.speed * math.cos(self.angle)
+                    self.position.y -= self.speed * math.sin(self.angle)
+            else:
+                self.position.x -= self.speed * math.cos(self.angle)
+                self.position.y -= self.speed * math.sin(self.angle)
+        else:
             self.position.x -= self.speed * math.cos(self.angle)
             self.position.y -= self.speed * math.sin(self.angle)
 
-    def get_tank(self,tankx,tanky):
+    def get_tank(self,tankx,tanky,tankd):
         """checks if touching tank."""
 
-        point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x + TANK_WIDTH,self.position.y + TANK_HEIGHT)
-        point = point.collidepoint(tankx,tanky)
+        tankw = (TANK_WIDTH * math.sin(math.radians(tankd))) // 2
+        tankh = (TANK_HEIGHT * math.cos(math.radians(tankd))) // 2
+
+        point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+        point = point.collidepoint(tankx + tankw,tanky + tankh)
+        if not point:
+            point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+            point = point.collidepoint(tankx - tankw,tanky - tankh)
+            if not point:
+                point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+                point = point.collidepoint(tankx - tankw,tanky + tankh)
+                if not point:
+                    point = pygame.Rect(ENEMY_SIZE,ENEMY_SIZE,self.position.x,self.position.y)
+                    point = point.collidepoint(tankx + tankw,tanky - tankh)
+
         return(point)
             
         
