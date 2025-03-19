@@ -52,15 +52,7 @@ while True:
     if keys[pygame.K_SPACE]:
         projectiles.append(tank.fire_projectile())  # Fire projectile
 
-
-    # Update projectiles
-    for projectile in projectiles[:]:
-        projectile.update()
-        if projectile.is_off_screen():
-            projectiles.remove(projectile)  # Remove projectiles that go off-screen
-        projectile.draw(screen)
-
-    # Update enemys
+     # Update enemys
     for enemy in enemys[:]:
         enemy.update(tank.position.x,tank.position.y,tank.angle)
         if enemy.get_tank(tank.position.x,tank.position.y,tank.angle):
@@ -69,6 +61,15 @@ while True:
         if enemy.is_off_screen():
             enemys.remove(enemy)  # Remove enemys that go off-screen
         enemy.draw(screen)
+
+    # Update projectiles
+    for projectile in projectiles[:]:
+        projectile.update()
+        if projectile.is_off_screen():
+            projectiles.remove(projectile)  # Remove projectiles that go off-screen
+        projectile.draw(screen)
+
+   
 
     # Draw the tank
     tank.draw(screen)
