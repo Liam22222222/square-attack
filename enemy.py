@@ -9,8 +9,8 @@ SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 900
 ENEMY_SPEED = 5
 ENEMY_SIZE = 8
-TANK_WIDTH = 200
-TANK_HEIGHT = 128
+TANK_WIDTH = 200 * 2
+TANK_HEIGHT = 128 * 2
 
 
 #var
@@ -38,17 +38,19 @@ class Enemy:
             on = math.pi
         self.angle = (math.atan(oy/ox)) + on
 
-        tankw = TANK_WIDTH * math.cos(math.radians(tankd))
-        tankh = TANK_HEIGHT * math.sin(math.radians(tankd))
-
+        tankw = TANK_WIDTH * math.sin(tankd)
+        tankh = TANK_HEIGHT * math.cos(tankd)
+        
         self.position.x += self.speed * math.cos(self.angle)
         self.position.y += self.speed * math.sin(self.angle)
 
         col = pygame.Rect(tankx,tanky,tankw,tankh)
         point = col.collidepoint(self.position.x,self.position.y)
+        
         if point:
             self.position.x -= self.speed * math.cos(self.angle)
             self.position.y -= self.speed * math.sin(self.angle)
+        
 
     def get_tank(self,tankx,tanky,tankd):
         """checks if touching tank."""
